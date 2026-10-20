@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProveMax | Productos para tu negocio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root{
+      --primary:#0b5ed7; --primary-dark:#084298; --accent:#ffb703; --ink:#10243e;
+      --muted:#6b7a90; --bg:#f5f8fc; --card:#fff; --line:#e3eaf3; --ok:#198754;
+      --danger:#dc3545; --shadow:0 14px 35px rgba(28,56,92,.10); --radius:20px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+    button,input{font:inherit}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1180px,calc(100% - 34px));margin:auto}
+
+    /* HEADER */
+    .topbar{background:#071a33;color:#dce9fa;font-size:13px;padding:9px 0}
+    .topbar .container{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .topbar i{color:#7fc0ff;margin-right:6px}
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:23px;color:var(--primary)}
+    .brand-logo{width:43px;height:43px;border-radius:13px;background:linear-gradient(135deg,var(--primary),#3ea1ff);display:grid;place-items:center;color:white;box-shadow:0 8px 18px rgba(11,94,215,.2)}
+    nav{display:flex;gap:25px;align-items:center}
+    nav a{font-weight:600;font-size:14px;color:#31445f;transition:.2s}
+    nav a:hover{color:var(--primary)}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .cart-btn,.menu-btn{border:0;background:#eef5ff;color:var(--primary);border-radius:13px;padding:11px 14px;cursor:pointer;font-weight:700;position:relative}
+    .cart-count{position:absolute;right:-6px;top:-7px;background:var(--danger);color:#fff;border-radius:50%;min-width:20px;height:20px;padding:0 5px;display:grid;place-items:center;font-size:11px}
+    .menu-btn{display:none}
+
+    /* HERO */
+    .hero{padding:56px 0 26px}
+    .hero-wrap{background:linear-gradient(115deg,#0b5ed7 0%,#0b73e0 48%,#20a4f3 100%);border-radius:30px;min-height:390px;color:white;display:grid;grid-template-columns:1.1fr .9fr;overflow:hidden;box-shadow:0 22px 60px rgba(11,94,215,.22)}
+    .hero-copy{padding:56px;display:flex;flex-direction:column;justify-content:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.18);padding:8px 12px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:16px}
+    .hero h1{font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:-1.7px;margin-bottom:18px}
+    .hero p{font-size:17px;line-height:1.65;color:#e8f3ff;max-width:590px;margin-bottom:25px}
+    .hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{border:0;border-radius:13px;padding:13px 18px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-light{background:#fff;color:var(--primary)}
+    .btn-accent{background:var(--accent);color:#3c2c00}
+    .hero-art{position:relative;display:grid;place-items:center;padding:32px}
+    .bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.12)}
+    .b1{width:260px;height:260px;right:-65px;top:-55px}.b2{width:140px;height:140px;left:30px;bottom:20px}
+    .hero-box{width:min(390px,92%);background:white;border-radius:28px;padding:20px;transform:rotate(2deg);box-shadow:0 25px 55px rgba(3,29,62,.25);z-index:2}
+    .hero-products{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .mini-product{height:130px;background:#f6f9fd;border-radius:18px;padding:10px;display:grid;place-items:center}
+    .mini-product img{width:100%;height:100%;object-fit:contain}
+    .hero-box h3{color:var(--ink);margin-top:16px;font-size:20px}.hero-box p{color:var(--muted);font-size:13px;margin:6px 0 0}
+
+    /* BENEFITS */
+    .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:25px auto 52px}
+    .benefit{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;display:flex;align-items:center;gap:12px}
+    .benefit-icon{width:42px;height:42px;border-radius:12px;background:#eaf4ff;color:var(--primary);display:grid;place-items:center;font-size:18px}
+    .benefit strong{display:block;font-size:14px}.benefit span{font-size:12px;color:var(--muted)}
+
+    /* PRODUCTS */
+    section{scroll-margin-top:95px}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px}
+    .section-head h2{font-size:32px;letter-spacing:-.8px}.section-head p{color:var(--muted);margin-top:7px}
+    .search{background:#fff;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;padding:0 14px;min-width:280px}
+    .search i{color:#8ca0b8}.search input{border:0;outline:0;width:100%;padding:12px;background:transparent}
+    .categories{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+    .chip{border:1px solid var(--line);background:#fff;color:#52657e;padding:10px 15px;border-radius:999px;cursor:pointer;font-weight:700;font-size:13px}
+    .chip.active,.chip:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .product-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 7px 22px rgba(22,45,72,.055);transition:.23s;position:relative}
+    .product-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+    .product-img{height:205px;background:linear-gradient(180deg,#fbfdff,#f2f7fc);display:flex;align-items:center;justify-content:center;padding:20px;position:relative}
+    .product-img img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+    .tag{position:absolute;left:13px;top:13px;padding:6px 9px;border-radius:999px;background:#e6fff1;color:#147343;font-size:11px;font-weight:800}
+    .tag.offer{background:#fff0d2;color:#8b5d00}
+    .product-body{padding:17px}
+    .category{color:var(--primary);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.65px}
+    .product-card h3{font-size:16px;margin:6px 0 7px;line-height:1.3;min-height:42px}
+    .desc{font-size:12.5px;color:var(--muted);line-height:1.5;min-height:38px}
+    .price-row{display:flex;align-items:end;justify-content:space-between;margin-top:15px;gap:10px}
+    .price{font-size:22px;font-weight:800;color:#10243e}.price small{font-size:11px;color:var(--muted);font-weight:600}
+    .add{width:42px;height:42px;border:0;border-radius:12px;background:var(--primary);color:#fff;cursor:pointer;font-size:17px;transition:.2s}.add:hover{background:var(--primary-dark);transform:scale(1.05)}
+
+    /* OFFERS */
+    .offer-section{margin:70px auto;background:#081b34;border-radius:26px;padding:35px;color:white;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+    .offer-section h2{font-size:30px;margin-bottom:9px}.offer-section p{color:#c9d9eb;line-height:1.6}.offer-badge{background:var(--accent);color:#332500;border-radius:20px;padding:22px 26px;text-align:center;font-weight:900;font-size:27px;min-width:210px}.offer-badge small{display:block;font-size:12px;margin-top:3px}
+
+    /* ABOUT */
+    .about{padding:5px 0 70px}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.about-card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:34px;box-shadow:var(--shadow)}
+    .about h2{font-size:34px;margin-bottom:14px}.about p{color:var(--muted);line-height:1.75}.checks{display:grid;gap:12px;margin-top:20px}.check{display:flex;gap:10px;align-items:flex-start}.check i{color:var(--ok);margin-top:3px}
+    .contact-box{background:linear-gradient(135deg,#eaf4ff,#fff);border:1px solid #d7e9ff;border-radius:26px;padding:34px}.contact-box h3{font-size:24px;margin-bottom:10px}.contact-line{display:flex;gap:12px;align-items:center;margin-top:16px}.contact-line i{width:42px;height:42px;border-radius:12px;background:#fff;display:grid;place-items:center;color:var(--primary);box-shadow:0 5px 16px rgba(0,0,0,.07)}
+
+    footer{background:#071a33;color:#b9c9dc;padding:30px 0}.footer-grid{display:flex;justify-content:space-between;gap:25px;align-items:center;flex-wrap:wrap}.footer-brand{font-size:21px;font-weight:800;color:#fff}
+
+    /* CART */
+    .overlay{position:fixed;inset:0;background:rgba(3,14,28,.48);z-index:80;opacity:0;pointer-events:none;transition:.25s}.overlay.show{opacity:1;pointer-events:auto}
+    .cart{position:fixed;right:0;top:0;height:100vh;width:min(430px,100%);background:#fff;z-index:90;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;box-shadow:-20px 0 55px rgba(0,0,0,.16)}
+    .cart.show{transform:translateX(0)}
+    .cart-head{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.cart-head h2{font-size:21px}.close{border:0;background:#f0f4f8;width:38px;height:38px;border-radius:11px;cursor:pointer}
+    .cart-items{flex:1;overflow:auto;padding:16px}.cart-empty{text-align:center;color:var(--muted);padding:70px 20px}.cart-empty i{font-size:45px;color:#c2cfdd;margin-bottom:12px}
+    .cart-item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}.cart-item img{width:64px;height:64px;object-fit:contain;background:#f7f9fc;border-radius:12px;padding:6px}.cart-item h4{font-size:13px}.cart-item p{color:var(--primary);font-weight:800;font-size:13px;margin-top:4px}.qty{display:flex;align-items:center;gap:7px;margin-top:7px}.qty button{width:25px;height:25px;border:1px solid var(--line);background:#fff;border-radius:7px;cursor:pointer}.remove{border:0;background:none;color:var(--danger);cursor:pointer}
+    .cart-foot{border-top:1px solid var(--line);padding:20px}.total{display:flex;justify-content:space-between;font-size:19px;font-weight:800;margin-bottom:15px}.checkout{width:100%;justify-content:center;background:#25d366;color:#fff}.checkout:hover{background:#1fab54}.clear{width:100%;justify-content:center;margin-top:9px;background:#f4f6f9;color:#52657e}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:#071a33;color:#fff;padding:12px 17px;border-radius:12px;z-index:120;opacity:0;pointer-events:none;transition:.25s;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.18)}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+    @media(max-width:980px){
+      nav{position:absolute;left:17px;right:17px;top:74px;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);padding:16px;display:none;flex-direction:column;align-items:flex-start}nav.open{display:flex}.menu-btn{display:block}.hero-wrap{grid-template-columns:1fr}.hero-art{display:none}.benefits{grid-template-columns:1fr 1fr}.products-grid{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr}.offer-section{grid-template-columns:1fr}.offer-badge{width:max-content}}
+    @media(max-width:620px){.topbar .container span:last-child{display:none}.hero{padding-top:24px}.hero-copy{padding:34px 25px}.hero h1{font-size:38px}.benefits{grid-template-columns:1fr}.section-head{align-items:stretch;flex-direction:column}.search{min-width:0;width:100%}.products-grid{grid-template-columns:1fr}.offer-section{margin-top:50px;padding:25px}.offer-badge{min-width:0;width:100%}.about-card,.contact-box{padding:24px}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <span><i class="fa-solid fa-truck-fast"></i> Entregas para bodegas, tiendas y negocios</span>
+      <span><i class="fa-solid fa-phone"></i> Atención: +51 987 654 321</span>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="brand"><span class="brand-logo"><i class="fa-solid fa-boxes-stacked"></i></span> ProveMax</a>
+      <nav id="menu">
+        <a href="#inicio">Inicio</a><a href="#productos">Productos</a><a href="#ofertas">Ofertas</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="menu-btn" onclick="toggleMenu()" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+        <button class="cart-btn" onclick="openCart()"><i class="fa-solid fa-cart-shopping"></i> Carrito <span id="cartCount" class="cart-count">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero container">
+      <div class="hero-wrap">
+        <div class="hero-copy">
+          <span class="eyebrow"><i class="fa-solid fa-bolt"></i> Abastece tu negocio fácil y rápido</span>
+          <h1>Todo lo que tu negocio necesita, en un solo lugar.</h1>
+          <p>Encuentra gaseosas, agua, snacks, galletas y productos de consumo masivo. Revisa precios, agrega al carrito y realiza tu pedido directamente.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-light" href="#productos"><i class="fa-solid fa-basket-shopping"></i> Ver productos</a>
+            <a class="btn btn-accent" href="#ofertas"><i class="fa-solid fa-tag"></i> Ver ofertas</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <span class="bubble b1"></span><span class="bubble b2"></span>
+          <div class="hero-box">
+            <div class="hero-products">
+              <div class="mini-product"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca_Cola_Flasche_-_Original_Taste.jpg/330px-Coca_Cola_Flasche_-_Original_Taste.jpg" alt="Gaseosa Coca-Cola"></div>
+              <div class="mini-product"><img src="https://varietyvendz.co.uk/cdn/shop/files/IncaKola300mlglass.png?v=1765781602&width=1024" alt="Inca Kola"></div>
+              <div class="mini-product"><img src="https://www.douglasfoodvalu.com/cdn/shop/files/c61ba9a3-334e-4da2-8c80-171f16ee056d.jpg?v=1741231989&width=1920" alt="Sprite"></div>
+            </div>
+            <h3>Compra por unidad o por caja</h3>
+            <p>Productos para clientes finales, bodegas, minimarkets y pequeños negocios.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container benefits">
+      <div class="benefit"><span class="benefit-icon"><i class="fa-solid fa-truck"></i></span><div><strong>Entrega rápida</strong><span>Coordinamos tu despacho</span></div></div>
+      <div class="benefit"><span class="benefit-icon"><i class="fa-solid fa-box-open"></i></span><div><strong>Variedad de productos</strong><span>Todo para abastecerte</span></div></div>
+      <div class="benefit"><span class="benefit-icon"><i class="fa-solid fa-tags"></i></span><div><strong>Precios competitivos</strong><span>Ofertas por volumen</span></div></div>
+      <div class="benefit"><span class="benefit-icon"><i class="fa-brands fa-whatsapp"></i></span><div><strong>Pedido sencillo</strong><span>Finaliza por WhatsApp</span></div></div>
+    </div>
+
+    <section id="productos" class="container">
+      <div class="section-head">
+        <div><h2>Nuestros productos</h2><p>Selecciona lo que necesitas y agrégalo a tu carrito.</p></div>
+        <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="searchInput" type="search" placeholder="Buscar gaseosa, galletas..." oninput="renderProducts()"></label>
+      </div>
+      <div id="categoryFilters" class="categories"></div>
+      <div id="productsGrid" class="products-grid"></div>
+    </section>
+
+    <section id="ofertas" class="container offer-section">
+      <div><h2>Oferta para compras por volumen</h2><p>Agrega varios productos al carrito y solicita una cotización. Podemos preparar pedidos para bodegas, minimarkets, cafeterías y otros negocios.</p></div>
+      <div class="offer-badge">HASTA 10% <small>EN PEDIDOS MAYORISTAS</small></div>
+    </section>
+
+    <section id="nosotros" class="container about">
+      <div class="about-grid">
+        <div class="about-card">
+          <h2>Sobre ProveMax</h2>
+          <p>Somos una distribuidora orientada a facilitar la compra de productos de consumo masivo. Esta página permite que el cliente vea los productos disponibles, sus precios y arme su pedido sin entrar a un sistema administrativo.</p>
+          <div class="checks">
+            <div class="check"><i class="fa-solid fa-circle-check"></i><span>Catálogo claro para clientes.</span></div>
+            <div class="check"><i class="fa-solid fa-circle-check"></i><span>Carrito de compra con cálculo automático.</span></div>
+            <div class="check"><i class="fa-solid fa-circle-check"></i><span>Pedido listo para enviar por WhatsApp.</span></div>
+          </div>
+        </div>
+        <div id="contacto" class="contact-box">
+          <h3>¿Necesitas hacer un pedido?</h3>
+          <p>Comunícate con nosotros y consulta disponibilidad, precios por caja o condiciones de entrega.</p>
+          <div class="contact-line"><i class="fa-brands fa-whatsapp"></i><div><strong>WhatsApp</strong><br><span>+51 987 654 321</span></div></div>
+          <div class="contact-line"><i class="fa-solid fa-envelope"></i><div><strong>Correo</strong><br><span>ventas@provemax.pe</span></div></div>
+          <div class="contact-line"><i class="fa-solid fa-location-dot"></i><div><strong>Atención</strong><br><span>Lima, Perú</span></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-grid"><div><div class="footer-brand">ProveMax</div><small>Distribución de productos de consumo masivo</small></div><small>© 2026 ProveMax · Página demostrativa para clientes</small></div></footer>
+
+  <div id="overlay" class="overlay" onclick="closeCart()"></div>
+  <aside id="cart" class="cart">
+    <div class="cart-head"><h2><i class="fa-solid fa-cart-shopping"></i> Tu pedido</h2><button class="close" onclick="closeCart()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-foot">
+      <div class="total"><span>Total</span><span id="cartTotal">S/ 0.00</span></div>
+      <button class="btn checkout" onclick="sendWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Solicitar pedido por WhatsApp</button>
+      <button class="btn clear" onclick="clearCart()"><i class="fa-solid fa-trash"></i> Vaciar carrito</button>
+    </div>
+  </aside>
+  <div id="toast" class="toast"></div>
+
+<script>
+const PRODUCTS = [
+  {id:1,name:'Coca-Cola Original',category:'Gaseosas',unit:'Botella 500 ml',price:3.50,stock:35,offer:false,desc:'Bebida gaseosa sabor cola, ideal para venta individual.',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca_Cola_Flasche_-_Original_Taste.jpg/330px-Coca_Cola_Flasche_-_Original_Taste.jpg'},
+  {id:2,name:'Inca Kola',category:'Gaseosas',unit:'Botella 300 ml',price:3.00,stock:28,offer:true,desc:'La clásica gaseosa amarilla para acompañar comidas.',img:'https://varietyvendz.co.uk/cdn/shop/files/IncaKola300mlglass.png?v=1765781602&width=1024'},
+  {id:3,name:'Pepsi',category:'Gaseosas',unit:'Botella 500 ml',price:3.20,stock:42,offer:false,desc:'Gaseosa sabor cola en presentación personal.',img:'https://www.quickcartapp.in/uploads/media/2025/Pepsi-Soft-Drink.jpeg'},
+  {id:4,name:'Sprite',category:'Gaseosas',unit:'Botella 1.25 L',price:5.90,stock:20,offer:true,desc:'Bebida gasificada sabor lima-limón.',img:'https://www.douglasfoodvalu.com/cdn/shop/files/c61ba9a3-334e-4da2-8c80-171f16ee056d.jpg?v=1741231989&width=1920'},
+  {id:5,name:'Galletas Oreo Original',category:'Galletas',unit:'Paquete 144 g',price:4.50,stock:30,offer:false,desc:'Galletas de chocolate con relleno sabor vainilla.',img:'https://images.tcdn.com.br/img/img_prod/1176430/biscoito_oreo_original_144g_6775_1_1777e6d012bd58ae8978b3d2eb4924e7.png'},
+  {id:6,name:'Agua mineral',category:'Bebidas',unit:'Botella 625 ml',price:2.00,stock:50,offer:false,desc:'Agua sin gas para consumo diario.',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Bottle_of_water.jpg/640px-Bottle_of_water.jpg'},
+  {id:7,name:'Papas fritas clásicas',category:'Snacks',unit:'Bolsa 150 g',price:5.50,stock:24,offer:true,desc:'Snack crocante, práctico para tiendas y reuniones.',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Potato-Chips.jpg/640px-Potato-Chips.jpg'},
+  {id:8,name:'Leche evaporada',category:'Abarrotes',unit:'Lata 400 g',price:4.20,stock:32,offer:false,desc:'Producto básico para cocina y consumo familiar.',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Evaporated_milk.jpg/640px-Evaporated_milk.jpg'},
+  {id:9,name:'Atún en conserva',category:'Abarrotes',unit:'Lata 170 g',price:6.80,stock:18,offer:false,desc:'Conserva práctica, lista para preparar diferentes comidas.',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Canned_tuna.jpg/640px-Canned_tuna.jpg'},
+  {id:10,name:'Chocolate en barra',category:'Dulces',unit:'Unidad 100 g',price:4.00,stock:45,offer:true,desc:'Chocolate para consumo personal o venta en mostrador.',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chocolate_%28blue_background%29.jpg/640px-Chocolate_%28blue_background%29.jpg'},
+  {id:11,name:'Galletas de vainilla',category:'Galletas',unit:'Paquete',price:3.20,stock:40,offer:false,desc:'Galletas dulces para lonchera o consumo diario.',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Cookies_on_a_plate.jpg/640px-Cookies_on_a_plate.jpg'},
+  {id:12,name:'Jugo de naranja',category:'Bebidas',unit:'Botella 1 L',price:6.50,stock:26,offer:false,desc:'Bebida sabor naranja para desayuno o refrigerio.',img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Orange_juice_1.jpg/640px-Orange_juice_1.jpg'}
+];
+let activeCategory='Todos';
+let cart=JSON.parse(localStorage.getItem('provemax_client_cart')||'[]');
+
+function money(n){return 'S/ '+Number(n).toFixed(2)}
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function fallback(img){img.onerror=null;img.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="500" height="380"><rect width="100%" height="100%" fill="#eef4fa"/><text x="50%" y="46%" text-anchor="middle" font-family="Arial" font-size="70">🛒</text><text x="50%" y="67%" text-anchor="middle" font-family="Arial" font-size="22" fill="#718096">Producto</text></svg>`)}
+function renderCategories(){
+  const cats=['Todos',...new Set(PRODUCTS.map(p=>p.category))];
+  document.getElementById('categoryFilters').innerHTML=cats.map(c=>`<button class="chip ${c===activeCategory?'active':''}" onclick="setCategory('${c}')">${c}</button>`).join('');
+}
+function setCategory(c){activeCategory=c;renderCategories();renderProducts()}
+function renderProducts(){
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  const list=PRODUCTS.filter(p=>(activeCategory==='Todos'||p.category===activeCategory)&&(p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)));
+  document.getElementById('productsGrid').innerHTML=list.length?list.map(p=>`
+    <article class="product-card">
+      <div class="product-img"><span class="tag ${p.offer?'offer':''}">${p.offer?'OFERTA':'DISPONIBLE'}</span><img src="${p.img}" alt="${escapeHtml(p.name)}" onerror="fallback(this)" loading="lazy"></div>
+      <div class="product-body"><span class="category">${p.category}</span><h3>${escapeHtml(p.name)}</h3><p class="desc">${escapeHtml(p.desc)}</p>
+      <div class="price-row"><div class="price">${money(p.price)} <small>/ ${p.unit}</small></div><button class="add" title="Agregar al carrito" onclick="addToCart(${p.id})"><i class="fa-solid fa-plus"></i></button></div></div>
+    </article>`).join(''):'<p style="grid-column:1/-1;padding:35px;text-align:center;color:#6b7a90">No se encontraron productos.</p>';
+}
+function addToCart(id){const p=PRODUCTS.find(x=>x.id===id);const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});saveCart();toast(`${p.name} agregado al carrito`)}
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.id!==id);saveCart()}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);saveCart()}
+function clearCart(){cart=[];saveCart();toast('Carrito vacío')}
+function saveCart(){localStorage.setItem('provemax_client_cart',JSON.stringify(cart));renderCart()}
+function renderCart(){
+  const count=cart.reduce((a,b)=>a+b.qty,0);document.getElementById('cartCount').textContent=count;
+  const box=document.getElementById('cartItems');let total=0;
+  if(!cart.length)box.innerHTML='<div class="cart-empty"><i class="fa-solid fa-basket-shopping"></i><p>Tu carrito está vacío.</p></div>';
+  else box.innerHTML=cart.map(i=>{const p=PRODUCTS.find(x=>x.id===i.id);if(!p)return'';total+=p.price*i.qty;return `<div class="cart-item"><img src="${p.img}" onerror="fallback(this)" alt="${escapeHtml(p.name)}"><div><h4>${escapeHtml(p.name)}</h4><p>${money(p.price*i.qty)}</p><div class="qty"><button onclick="changeQty(${i.id},-1)">−</button><strong>${i.qty}</strong><button onclick="changeQty(${i.id},1)">+</button></div></div><button class="remove" onclick="removeItem(${i.id})"><i class="fa-solid fa-trash"></i></button></div>`}).join('');
+  document.getElementById('cartTotal').textContent=money(total);
+}
+function openCart(){document.getElementById('cart').classList.add('show');document.getElementById('overlay').classList.add('show')}
+function closeCart(){document.getElementById('cart').classList.remove('show');document.getElementById('overlay').classList.remove('show')}
+function toggleMenu(){document.getElementById('menu').classList.toggle('open')}
+function sendWhatsApp(){
+  if(!cart.length){toast('Agrega productos antes de realizar el pedido');return}
+  let total=0;let lines=['Hola ProveMax, deseo solicitar el siguiente pedido:',''];
+  cart.forEach(i=>{const p=PRODUCTS.find(x=>x.id===i.id);const sub=p.price*i.qty;total+=sub;lines.push(`• ${p.name} x${i.qty} = ${money(sub)}`)});
+  lines.push('',`Total referencial: ${money(total)}`,'','¿Me confirman disponibilidad y entrega?');
+  const phone='51987654321';window.open(`https://wa.me/${phone}?text=${encodeURIComponent(lines.join('\n'))}`,'_blank');
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove('show'),2200)}
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('menu').classList.remove('open')));
+renderCategories();renderProducts();renderCart();
+</script>
+</body>
+</html>

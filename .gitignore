@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.pedidos.xlsx
+pedidos.xlsx
+screens/
+.venv/
+venv/
+~$*
+.DS_Store
